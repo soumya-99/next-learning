@@ -1,11 +1,6 @@
 import React from 'react'
 import UsersTable from './UsersTable'
-
-interface User {
-    id: number
-    name: string
-    email: string
-}
+import Link from 'next/link'
 
 interface Props {
     searchParams: { sortOrder: string }
@@ -17,6 +12,7 @@ const UsersPage = async ({ searchParams: { sortOrder } }: Props) => {
     return (
         <div>
             <h1>Users Page</h1>
+            <Link className='btn' href="/users/new">New User</Link>
             <UsersTable sortOrder={sortOrder} />
         </div>
     )
