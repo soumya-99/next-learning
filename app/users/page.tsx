@@ -7,12 +7,17 @@ interface User {
     email: string
 }
 
-const UsersPage = async () => {
+interface Props {
+    searchParams: { sortOrder: string }
+}
 
+const UsersPage = async ({ searchParams: { sortOrder } }: Props) => {
+
+    // console.log(sortOrder)
     return (
         <div>
             <h1>Users Page</h1>
-            <UsersTable />
+            <UsersTable sortOrder={sortOrder} />
         </div>
     )
 }
