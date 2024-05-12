@@ -12,12 +12,12 @@
 	}
 }
 
-body {
-	/* color: rgb(var(--foreground-rgb)); */
-}
-
-/* @layer utilities {
-	.text-balance {
-		text-wrap: balance;
-	}
+/* body {
+	padding: 1rem;
 } */
+
+@layer base {
+	h1 {
+		@apply font-extrabold text-2xl;
+	}
+}
