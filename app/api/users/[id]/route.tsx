@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import schema from "../schema";
 
 interface Props {
     params: { id: number }
@@ -11,10 +12,12 @@ export function GET(request: NextRequest, { params: { id } }: Props) {
     return NextResponse.json({ id: id, name: "Soumya" }, { status: 200 })
 }
 
-export async function POST(request: NextRequest) {
+export async function PUT(request: NextRequest, { params: { id } }: Props) {
     const body = await request.json()
-    if (!body.name) {
-        return NextResponse.json({ error: "Name is required." }, { status: 400 })
-    }
-    return NextResponse.json({ id: 1, name: body.name }, { status: 201 })
+    const validation = schema.safeParse(body)
+    if (!validation.success)
+        return NextResponse.json(validation.error.errors, { status: 400 })
+    if (id > 10)
+        return NextResponse.json({ error: "User not found" }, { status: 404 })
+    return NextResponse.json({ id: 1, name: body.name })
 }
